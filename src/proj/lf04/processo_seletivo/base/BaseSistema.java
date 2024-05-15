@@ -110,27 +110,10 @@ class VerificacaoDados {
     // Método que verifica o valor informado pelo usuário em relação ao seu salário pretendido:
     void verificar_salario_pretendido(double salario_pretendido_candidato){
 
-        // Variável de validação:
-        boolean entrada_validada = false;
+        
 
-        while(entrada_validada == false || salario_pretendido_candidato <= 0){
-
-            // Limpando console:
-            funcionalidades.limpar_console();
-
-            // Pedindo valor enquanto for inválido:
-            try{
-                System.out.println("\nO valor inserido é invalido!\nInsira um valor válido abaixo:");
-                salario_pretendido_candidato = scanf.nextDouble();
-                entrada_validada = true;
-            }
-            catch(InputMismatchException exception){
-                // Limpando scanner:
-                scanf.next();
-            }
-
-        }
     }
+    
 
 
 }
