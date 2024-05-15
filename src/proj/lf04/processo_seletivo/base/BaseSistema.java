@@ -3,6 +3,7 @@ package proj.lf04.processo_seletivo.base;
 // Importações nescessárias:
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.lang.Thread;
 
 
 // Classe onde os métodos que serão nescessários para o funcionamento do sistema serão implementados.
@@ -19,11 +20,13 @@ public class BaseSistema {
         // Intâncias nescessárias para o funcionamento:
         Scanner scanf = new Scanner(System.in);
         VerificacaoDados verificacao = new VerificacaoDados();
+        FuncionalidadesDoSistema funcionalidade = new FuncionalidadesDoSistema();
         
         // Pedindo as informações pelo teclado:
         // Nome: -> (Não é nescessário fazer tratamento de erros em valores 'String', pois irá ser aceito qualquer tipo de valor).
         System.out.println("Olá candidato, primeiramente nos informe o seu nome.\n* Somente o primeiro nome *\n");
         nome_candidato = scanf.nextLine();
+        funcionalidade.limpar_console();
 
         // idade: -> Em todos os casos eu faço a verificação do valor. Tanto para valores numéricos inválidos, quanto para valores que não são do tipo inteiro.
         try{
@@ -99,7 +102,14 @@ class FuncionalidadesDoSistema{
     }
 
     // função que pausa a execução em 2 segundos:
-    
+    void pausar_dois_segundos(){
+        try{
+            Thread.sleep(2000);
+        }
+        catch(InterruptedException exception){
+            exception.getMessage();
+        }
+    }
 
 
 
