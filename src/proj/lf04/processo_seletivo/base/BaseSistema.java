@@ -36,12 +36,15 @@ public class BaseSistema {
             verificacao.verificar_idade(idade_candidato);
         }
 
+        // Salário Pretendido:
+
+
+
+
         // Fechando instância de 'Scanner':
         scanf.close();
         
     }
-    
-    
     
     // Método que compara e analisa o salário pretendido pelo canditado com relação ao salário base:
     public static void analisar_salario_candidato(double salario_pretendido_candidato){
@@ -80,5 +83,24 @@ class VerificacaoDados {
         }
     
     }   
+
+}
+
+class FuncionalidadesDoSistema{
+
+    // Função que limpa o terminal:
+    void limpar_console(){
+        try{
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // função que pausa a execução em 2 segundos:
+    
+
+
 
 }
