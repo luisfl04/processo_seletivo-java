@@ -35,14 +35,20 @@ public class BaseSistema {
             verificacao.verificar_idade(idade_candidato);
         }
         catch(InputMismatchException exception){
-            System.out.println("\nERRO -> * Você digitou um valor com tipo inesperado. * ");
             verificacao.verificar_idade(idade_candidato);
         }
 
-        // Salário Pretendido:
+        // Salário Pretendido: -> Em todos os casos faço verificação de valor:
+        funcionalidade.limpar_console();
 
-
-
+        try{
+            System.out.println(nome_candidato + ", qual valor de salário você pretende receber?\nInsira abaixo:");
+            salario_pretendido_candidato = scanf.nextDouble();
+            verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
+        }
+        catch(InputMismatchException exception){
+            verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
+        }
 
         // Fechando instância de 'Scanner':
         scanf.close();
@@ -60,8 +66,9 @@ public class BaseSistema {
 // Classe que vai conter os métodos que irão ser usados para analisar os dados que o candidato inseriu:
 class VerificacaoDados {   
     
-    // Criando instância de 'Scanner' globalmente para ser possível acessá-la de qualquer método.
+    // Instâncias nescessárias para o funcionamento da classe:
     Scanner scanf = new Scanner(System.in);
+    FuncionalidadesDoSistema funcionalidades = new FuncionalidadesDoSistema();
 
     // Método que verifica se o valor que o candidato informou para a sua idade é inválido:
     void verificar_idade(int idade_informada_pelo_usuario){
@@ -69,9 +76,12 @@ class VerificacaoDados {
         // Criação de variável 'entrada_validada' para validar a entrada do usuário somente quando o valor satisfazer todas as condições:
         boolean entrada_validada = false;
         
-        // Fazendo verificação e pedindo um valor válido:
-        while(idade_informada_pelo_usuario < 1 || idade_informada_pelo_usuario > 100 || entrada_validada == false){
-            
+        // Fazendo verificação para valores diferentes do tipo inteiro:
+        while(entrada_validada == false){
+
+            // Limpando console a cada entrada inválida:
+            funcionalidades.limpar_console();
+
             // Informando erro e tentando pedir o valor novamente:
             try{
                 System.out.println("\nO valor inserido é invalido!\nInsira um valor válido abaixo:");
@@ -79,13 +89,38 @@ class VerificacaoDados {
                 entrada_validada = true;
             }
             catch(InputMismatchException exception){
-                // Informando erro e limpando o 'scanner':
+                // limpando o 'scanner' para pedir o valor novamente em 'try':
+                scanf.next();
+            }
+
+        } 
+    }   
+
+    // Método que verifica o valor informado pelo usuário em relação ao seu salário pretendido:
+    void verificar_salario_pretendido(double salario_pretendido_candidato){
+
+        // Variável de validação:
+        boolean entrada_validada = false;
+
+        while(entrada_validada == false || salario_pretendido_candidato <= 0){
+
+            // Limpando console:
+            funcionalidades.limpar_console();
+
+            // Pedindo valor enquanto for inválido:
+            try{
+                System.out.println("\nO valor inserido é invalido!\nInsira um valor válido abaixo:");
+                salario_pretendido_candidato = scanf.nextDouble();
+                entrada_validada = true;
+            }
+            catch(InputMismatchException exception){
+                // Limpando scanner:
                 scanf.next();
             }
 
         }
-    
-    }   
+    }
+
 
 }
 
