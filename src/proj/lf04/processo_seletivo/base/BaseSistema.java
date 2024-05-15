@@ -38,17 +38,8 @@ public class BaseSistema {
             verificacao.verificar_idade(idade_candidato);
         }
 
-        // Salário Pretendido: -> Em todos os casos faço verificação de valor:
-        funcionalidade.limpar_console();
+        
 
-        try{
-            System.out.println(nome_candidato + ", qual valor de salário você pretende receber?\nInsira abaixo:");
-            salario_pretendido_candidato = scanf.nextDouble();
-            verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
-        }
-        catch(InputMismatchException exception){
-            verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
-        }
 
         // Fechando instância de 'Scanner':
         scanf.close();
@@ -69,24 +60,32 @@ class VerificacaoDados {
     // Instâncias nescessárias para o funcionamento da classe:
     Scanner scanf = new Scanner(System.in);
     FuncionalidadesDoSistema funcionalidades = new FuncionalidadesDoSistema();
+    
+    // Método que verifica o valor numérico da idade informada. Usado para fins de validação.
+    int verificar_idade_com_base_no_numero(int idade_informada_pelo_usuario){
+        // Verificando:
+        if(idade_informada_pelo_usuario > 0 && idade_informada_pelo_usuario <= 100){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
 
     // Método que verifica se o valor que o candidato informou para a sua idade é inválido:
     void verificar_idade(int idade_informada_pelo_usuario){
-
+        
         // Criado variável que irá validar o valor inserido pelo usuário de acordo com as condições.
         boolean entrada_validada = false;
 
-
-
-
-        // Verificando se o valor que o usuário informou está entre 1 e 100. Se tiver, a entrada é validada:
-        if(idade_informada_pelo_usuario > 0 && idade_informada_pelo_usuario <= 100){
+        // Verificando se o valor informado pelo usuário é válido:
+        if(verificar_idade_com_base_no_numero(idade_informada_pelo_usuario) == 1){
             entrada_validada = true;
         }
         
         // Informando erro para o usuário e pedindo um novo valor:
         while(entrada_validada == false){
-
+            
             // Limpando console a cada entrada inválida:
             funcionalidades.limpar_console();
 
@@ -94,11 +93,15 @@ class VerificacaoDados {
             try{
                 System.out.println("\nO valor inserido é invalido!!!!\nInsira um valor válido abaixo:");
                 idade_informada_pelo_usuario = scanf.nextInt();
-                entrada_validada = true;
+
+                // Verificando valor novamente:
+                if(verificar_idade_com_base_no_numero(idade_informada_pelo_usuario) == 1){
+                    entrada_validada = true;
+                }
             }
             catch(InputMismatchException exception){
                 // limpando o 'scanner' para pedir o valor novamente em 'try':
-                scanf.next();
+                scanf.next();   
             }
 
         } 
@@ -129,16 +132,6 @@ class VerificacaoDados {
         }
     }
 
-    // Método que verifica o valor numérico da idade informada. Usado para fins de validação.
-    int verificar_idade_com_base_no_numero(int idade_informada_pelo_usuario){
-        // Verificando:
-        if(idade_informada_pelo_usuario > 0 && idade_informada_pelo_usuario <= 100){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
 
 }
 
