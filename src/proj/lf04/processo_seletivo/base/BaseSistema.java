@@ -72,11 +72,19 @@ class VerificacaoDados {
 
     // Método que verifica se o valor que o candidato informou para a sua idade é inválido:
     void verificar_idade(int idade_informada_pelo_usuario){
-        
-        // Criação de variável 'entrada_validada' para validar a entrada do usuário somente quando o valor satisfazer todas as condições:
+
+        // Criado variável que irá validar o valor inserido pelo usuário de acordo com as condições.
         boolean entrada_validada = false;
+
+
+
+
+        // Verificando se o valor que o usuário informou está entre 1 e 100. Se tiver, a entrada é validada:
+        if(idade_informada_pelo_usuario > 0 && idade_informada_pelo_usuario <= 100){
+            entrada_validada = true;
+        }
         
-        // Fazendo verificação para valores diferentes do tipo inteiro:
+        // Informando erro para o usuário e pedindo um novo valor:
         while(entrada_validada == false){
 
             // Limpando console a cada entrada inválida:
@@ -84,7 +92,7 @@ class VerificacaoDados {
 
             // Informando erro e tentando pedir o valor novamente:
             try{
-                System.out.println("\nO valor inserido é invalido!\nInsira um valor válido abaixo:");
+                System.out.println("\nO valor inserido é invalido!!!!\nInsira um valor válido abaixo:");
                 idade_informada_pelo_usuario = scanf.nextInt();
                 entrada_validada = true;
             }
@@ -121,6 +129,16 @@ class VerificacaoDados {
         }
     }
 
+    // Método que verifica o valor numérico da idade informada. Usado para fins de validação.
+    int verificar_idade_com_base_no_numero(int idade_informada_pelo_usuario){
+        // Verificando:
+        if(idade_informada_pelo_usuario > 0 && idade_informada_pelo_usuario <= 100){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
 
 }
 
