@@ -38,6 +38,21 @@ public class BaseSistema {
             verificacao.verificar_idade(idade_candidato);
         }
 
+        // Salário pretendido: -> Em todos os casos tem verificação doo valor.
+        try{
+            // Limpando console
+            funcionalidade.limpar_console();
+
+            // Pendindo o valor para o usuário:
+            System.out.println("Qual o seu valor de salário pretendido?\nDigite abaixo:");
+            salario_pretendido_candidato = scanf.nextDouble();
+
+            // Fazendo verificação. Esta verificação está relacionada ao valor numérico informado.
+            
+        }
+        catch(InputMismatchException exception){
+
+        }
         
 
 
@@ -46,13 +61,8 @@ public class BaseSistema {
         
     }
     
-    // Método que compara e analisa o salário pretendido pelo canditado com relação ao salário base:
-    public static void analisar_salario_candidato(double salario_pretendido_candidato){
-        
-    } 
-    
-
 }
+
 
 // Classe que vai conter os métodos que irão ser usados para analisar os dados que o candidato inseriu:
 class VerificacaoDados {   
@@ -72,9 +82,25 @@ class VerificacaoDados {
         }
     }
 
+    // Método que verifica o valor numérico do salário pretendido pelo usuário:
+    int verificar_salario_pretendido_com_base_no_numero(double salario_pretendido_candidato){
+        if(salario_pretendido_candidato > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
     // Método que verifica se o valor que o candidato informou para a sua idade é inválido:
     void verificar_idade(int idade_informada_pelo_usuario){
-        
+        /**
+         * Este método recebe um valor do tipo inteiro e faz sua verificação tanto em relação a entrada numérica de dados,
+         * quanto para casos em que o usuário digite um valor de outro tipo, como uma string, por exemplo.
+         * @author @luisfl04_
+         * @return Não retorna nenhum tipo de valor, apenas recebe o valor da idade por parâmetro e faz a sua verificação.
+         */
+
         // Criado variável que irá validar o valor inserido pelo usuário de acordo com as condições.
         boolean entrada_validada = false;
 
@@ -88,7 +114,7 @@ class VerificacaoDados {
             
             // Limpando console a cada entrada inválida:
             funcionalidades.limpar_console();
-
+            
             // Informando erro e tentando pedir o valor novamente:
             try{
                 System.out.println("\nO valor inserido é invalido!!!!\nInsira um valor válido abaixo:");
@@ -103,14 +129,38 @@ class VerificacaoDados {
                 // limpando o 'scanner' para pedir o valor novamente em 'try':
                 scanf.next();   
             }
-
+            
         } 
     }   
-
+    
     // Método que verifica o valor informado pelo usuário em relação ao seu salário pretendido:
     void verificar_salario_pretendido(double salario_pretendido_candidato){
 
-        
+        // Variável que irá validar o valor informado pelo usuário.
+        boolean entrada_validada = false;
+
+        // Se o usuário digitou um valor numérico, esta condicional irá validar o valor:
+        if(verificar_salario_pretendido_com_base_no_numero(salario_pretendido_candidato) == 1){
+            entrada_validada = true;
+        }
+
+        // Loop que pede um novo valor para valores inválidos informados:
+        while(entrada_validada = false){
+
+            // Limpando console:
+            funcionalidades.limpar_console();
+
+            // Tentando pegar um novo valor e autorizar a entrada de dados:
+            try{
+                System.out.println("\n");
+            }
+
+
+
+        } 
+
+
+
 
     }
     
