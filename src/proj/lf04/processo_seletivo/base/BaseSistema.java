@@ -38,7 +38,7 @@ public class BaseSistema {
             verificacao.verificar_idade(idade_candidato);
         }
 
-        // Salário pretendido: -> Em todos os casos tem verificação doo valor.
+        // Salário pretendido: -> Em todos os casos tem verificação do valor.
         try{
             // Limpando console
             funcionalidade.limpar_console();
@@ -48,12 +48,15 @@ public class BaseSistema {
             salario_pretendido_candidato = scanf.nextDouble();
 
             // Fazendo verificação. Esta verificação está relacionada ao valor numérico informado.
-            
-        }
+            verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
+        }   
         catch(InputMismatchException exception){
-
+            verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
         }
-        
+
+        // 
+
+
 
 
         // Fechando instância de 'Scanner':
@@ -145,27 +148,30 @@ class VerificacaoDados {
         }
 
         // Loop que pede um novo valor para valores inválidos informados:
-        while(entrada_validada = false){
+        while(entrada_validada == false){
 
             // Limpando console:
             funcionalidades.limpar_console();
 
             // Tentando pegar um novo valor e autorizar a entrada de dados:
             try{
-                System.out.println("\n");
+                // Pedindo valor:
+                System.out.println("\nO valor que você inseriu é inválido!\nInsira um valor novamente abaixo:");
+                salario_pretendido_candidato = scanf.nextDouble();
+                
+                // Verificando novamente:
+                if(verificar_salario_pretendido_com_base_no_numero(salario_pretendido_candidato) == 1){
+                    entrada_validada = true;
+                }
             }
-
-
+            catch(InputMismatchException exception){
+                // Limpando 'scanner'.
+                scanf.next();
+            }
 
         } 
 
-
-
-
     }
-    
-
-
 }
 
 class FuncionalidadesDoSistema{
@@ -189,7 +195,5 @@ class FuncionalidadesDoSistema{
             exception.getMessage();
         }
     }
-
-
 
 }
