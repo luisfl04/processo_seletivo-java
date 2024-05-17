@@ -54,25 +54,73 @@ public class BaseSistema {
             verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
         }
 
-        // 
-
-
-
+        // Redirecionando o usuário com base no valor de salário que ele inseriu:
+        redirecionar_com_base_na_pretencao_de_salario(salario_pretendido_candidato);
 
         // Fechando instância de 'Scanner':
         scanf.close();
         
     }
-    
-}
 
+    // Método que recebe o valor de salário pretendido pelo o usuário e faz o redirecionamento com base nesse valor.
+    public static void redirecionar_com_base_na_pretencao_de_salario(double salario_pretendido_candidato){
+
+        // Intâncias nescessárias para funcionamento do método:
+        FuncionalidadesDoSistema funcionalidade = new FuncionalidadesDoSistema();
+        VerificacaoDados verificacao = new VerificacaoDados();
+        Scanner scanf = new Scanner(System.in);
+
+        // Pedindo que o usuario digite um novo valor, caso ele tenha pretendido um salário menor que 1000:
+        while(salario_pretendido_candidato <= 1000){
+            
+            // Limpando terminal:
+            funcionalidade.limpar_console();
+
+            // Tentando pedir um novo valor:
+            try{
+                System.out.println("O valor salarial que você informou é muito baixo. Tente inserir um valor acima de R$1000\nInsira abaixo");
+                salario_pretendido_candidato = scanf.nextDouble();
+
+                // Verificando o valor que ele inseriu:
+                verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
+            }
+            catch(InputMismatchException exception){
+                // Se gerar excessão, tento tratar também: 
+                verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
+            }   
+
+        }
+    
+        // Definindo o valor do salário base:
+        double salario_base = 2000;
+
+        // Criando variável que irá armazenar um número de telefone que irá se pedido para o usuário:
+        int numero_de_telefone_do_usuario;
+
+        // Fazendo o redirecionamento do usuário conforme o valor de salário que ele inseriu:
+        if(salario_pretendido_candidato > salario_base){
+            // Nesse caso, é informado para que o candidato aguarde um tempo, e depois é imprimido que ele não foi selecionado para a entrevista.
+            System.out.println("Tudo certo " + nome_candidato +". Nos informe agora, o seu número para contato.\n*Somente valores com 11 dígitos são válidos *\nInsira abaixo:");
+            
+            // Tentando pegar o número de telefone:
+
+            
+            
+        }
+
+        // Fechando instância de 'scanner':
+        scanf.close();
+
+    }
+
+}
 
 // Classe que vai conter os métodos que irão ser usados para analisar os dados que o candidato inseriu:
 class VerificacaoDados {   
     
     // Instâncias nescessárias para o funcionamento da classe:
     Scanner scanf = new Scanner(System.in);
-    FuncionalidadesDoSistema funcionalidades = new FuncionalidadesDoSistema();
+    FuncionalidadesDoSistema funcionalidade = new FuncionalidadesDoSistema();
     
     // Método que verifica o valor numérico da idade informada. Usado para fins de validação.
     int verificar_idade_com_base_no_numero(int idade_informada_pelo_usuario){
@@ -116,7 +164,7 @@ class VerificacaoDados {
         while(entrada_validada == false){
             
             // Limpando console a cada entrada inválida:
-            funcionalidades.limpar_console();
+            funcionalidade.limpar_console();
             
             // Informando erro e tentando pedir o valor novamente:
             try{
@@ -151,7 +199,7 @@ class VerificacaoDados {
         while(entrada_validada == false){
 
             // Limpando console:
-            funcionalidades.limpar_console();
+            funcionalidade.limpar_console();
 
             // Tentando pegar um novo valor e autorizar a entrada de dados:
             try{
@@ -172,6 +220,32 @@ class VerificacaoDados {
         } 
 
     }
+
+    // Método auxiliar de 'verificar_numero_de_telefone()' que verifica somente se o valor inserido pelo usuário for um valor numérico.
+    int verificar_valor_numerico_do_telefone(int numero_de_telefone_do_usuario){
+        // Tranformando o valor em uma string e contando os caracteres:
+        String numero_de_telefone_do_usuario_em_string = Integer.toString(numero_de_telefone_do_usuario);
+        int quantidade_de_caracteres_do_telefone = numero_de_telefone_do_usuario_em_string.length(); 
+
+        // Fazendo a verificação:
+        if(quantidade_de_caracteres_do_telefone == 11){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    // Método que verifica o valor de telefone que o usuário inseriu:
+    void verificar_numero_de_telefone(int numero_de_telefone_do_usuario){
+
+        
+
+
+    }
+
+
+
 }
 
 class FuncionalidadesDoSistema{
