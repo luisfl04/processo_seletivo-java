@@ -239,8 +239,36 @@ class VerificacaoDados {
     // Método que verifica o valor de telefone que o usuário inseriu:
     void verificar_numero_de_telefone(int numero_de_telefone_do_usuario){
 
-        
+        // Criando variável booleana de validação:
+        boolean entrada_validada = false;
 
+        // Verificando primeiramente o valor numérico inserido, se não for numérico, a execução não cai aqui.
+        if(verificar_valor_numerico_do_telefone(numero_de_telefone_do_usuario) == 1){
+            entrada_validada = true;
+        }
+
+        // Loop que pede um valor novo para o usuário sempre que ele digitar um valor inválido:
+        while(entrada_validada == false){
+
+            // Limpando console:
+            funcionalidade.limpar_console(); 
+
+            // Tentando pegar um valor novo:
+            try{
+                System.out.println("\nVocê digitou um valor de telefone inválido! Verifique as regras e insira novamente.\nDigite abaixo um novo valor:");
+                numero_de_telefone_do_usuario = scanf.nextInt();
+
+                // Verificando o valor inserido novamente:
+                if(verificar_valor_numerico_do_telefone(numero_de_telefone_do_usuario) == 1){
+                    entrada_validada = true;
+                }
+            }
+            catch(InputMismatchException exception){
+                // Se o usuário digitou um valor diferente do tipo numérico, é limpado o scanner e é pedido um novo valor:
+                scanf.next();
+            }
+        
+        }
 
     }
 
