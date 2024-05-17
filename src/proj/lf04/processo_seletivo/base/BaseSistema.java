@@ -103,7 +103,7 @@ public class BaseSistema {
             System.out.println("Tudo certo " + nome_candidato +". Nos informe agora, o seu número para contato.\n*Somente valores com 11 dígitos são válidos *\nInsira abaixo:");
             
             // Tentando pegar o número de telefone:
-
+            
             
             
         }
@@ -126,16 +126,6 @@ class VerificacaoDados {
     int verificar_idade_com_base_no_numero(int idade_informada_pelo_usuario){
         // Verificando:
         if(idade_informada_pelo_usuario > 0 && idade_informada_pelo_usuario <= 100){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-
-    // Método que verifica o valor numérico do salário pretendido pelo usuário:
-    int verificar_salario_pretendido_com_base_no_numero(double salario_pretendido_candidato){
-        if(salario_pretendido_candidato > 0){
             return 1;
         }
         else{
@@ -183,8 +173,18 @@ class VerificacaoDados {
             
         } 
     }   
-    
-    // Método que verifica o valor informado pelo usuário em relação ao seu salário pretendido:
+        
+    // Método que verifica somente o valor numérico do salário pretendido pelo usuário:
+    int verificar_salario_pretendido_com_base_no_numero(double salario_pretendido_candidato){
+        if(salario_pretendido_candidato > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    // Método que verifica se o valor inserido pelo usuário é valido. Tanto para valores numéricos, quanto para valores que podem gerar a excessão 'InputMismatchException':
     void verificar_salario_pretendido(double salario_pretendido_candidato){
 
         // Variável que irá validar o valor informado pelo usuário.
@@ -218,7 +218,6 @@ class VerificacaoDados {
             }
 
         } 
-
     }
 
     // Método auxiliar de 'verificar_numero_de_telefone()' que verifica somente se o valor inserido pelo usuário for um valor numérico.
@@ -269,9 +268,7 @@ class VerificacaoDados {
             }
         
         }
-
     }
-
 
 
 }
