@@ -13,7 +13,7 @@ public class BaseSistema {
     public static String nome_candidato;
     public static int idade_candidato;
     public static double salario_pretendido_candidato;
-    public static int numero_de_telefone_do_usuario;
+    public static long numero_de_telefone_do_usuario;
     public static double salario_base = 2000;  
 
     // Método que vai pedir as informações gerais do candidato, como: nome, salário pretendido e etc. É o métodp introdutório do sistema.
@@ -104,7 +104,7 @@ public class BaseSistema {
             
             // Tentando pegar o número de telefone:
             try{
-                numero_de_telefone_do_usuario = scanf.nextInt();
+                numero_de_telefone_do_usuario = scanf.nextLong();
                 // Fazendo verificação:
                 verificacao.verificar_numero_de_telefone(numero_de_telefone_do_usuario); 
             }    
@@ -123,7 +123,7 @@ public class BaseSistema {
 
             // Limpando console e informando que o candidato não conseguiu a vaga:
             funcionalidade.limpar_console();
-            System.out.println("\n" + nome_candidato + ",Iremos entrar em contato com você, fique atento ao seu telefone!\nObrigado por se candidatar.");
+            System.out.println("\n" + nome_candidato + ", Iremos entrar em contato com você, fique atento ao seu telefone!\nObrigado por se candidatar.");
 
         }
 
@@ -131,7 +131,6 @@ public class BaseSistema {
         scanf.close();
 
     }
-
 }
 
 // Classe que vai conter os métodos que irão ser usados para analisar os dados que o candidato inseriu:
@@ -234,9 +233,9 @@ class VerificacaoDados {
     }
 
     // Método auxiliar de 'verificar_numero_de_telefone()' que verifica somente se o valor inserido pelo usuário for um valor numérico.
-    boolean verificar_valor_numerico_do_telefone(int numero_de_telefone_do_usuario){
+    boolean verificar_valor_numerico_do_telefone(long numero_de_telefone_do_usuario){
         // Tranformando o valor em uma string e contando os caracteres:
-        String numero_de_telefone_do_usuario_em_string = Integer.toString(numero_de_telefone_do_usuario);
+        String numero_de_telefone_do_usuario_em_string = Long.toString(numero_de_telefone_do_usuario);
         int quantidade_de_caracteres_do_telefone = numero_de_telefone_do_usuario_em_string.length(); 
 
         // Fazendo a verificação:
@@ -244,12 +243,12 @@ class VerificacaoDados {
             return true;
         }
         else{
-            return true;
+            return false;
         }
     }
 
     // Método que verifica o valor de telefone que o usuário inseriu:
-    void verificar_numero_de_telefone(int numero_de_telefone_do_usuario){
+    void verificar_numero_de_telefone(long numero_de_telefone_do_usuario){
 
         // Criando variável booleana de validação:
         boolean entrada_validada = false;
@@ -268,7 +267,7 @@ class VerificacaoDados {
             // Tentando pegar um valor novo:
             try{
                 System.out.println("\nVocê digitou um valor de telefone inválido! Verifique as regras e insira novamente.\nDigite abaixo um novo valor:");
-                numero_de_telefone_do_usuario = scanf.nextInt();
+                numero_de_telefone_do_usuario = scanf.nextLong();
 
                 // Verificando o valor inserido novamente:
                 if(verificar_valor_numerico_do_telefone(numero_de_telefone_do_usuario) == true){
