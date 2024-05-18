@@ -97,26 +97,13 @@ public class BaseSistema {
         // Este fluxo diz respeito a quando o usuário quer um salário maior que o salário base implementado.
         if(salario_pretendido_candidato > salario_base){
 
-            // Primeiramente, limpando o terminal do usuário:
-            funcionalidade.limpar_console();
-
-            // Nesse caso, é informado para que o candidato aguarde um tempo, e depois é imprimido que ele não foi selecionado para a entrevista.
-            System.out.println("Tudo certo " + nome_candidato +". Nos informe agora, o seu número para contato.\n*Somente valores com 11 dígitos são válidos *\nInsira abaixo:");
-            
-            // Tentando pegar o número de telefone:
-            try{
-                numero_de_telefone_do_usuario = scanf.nextLong();
-                // Fazendo verificação:
-                verificacao.verificar_numero_de_telefone(numero_de_telefone_do_usuario); 
-            }    
-            catch(InputMismatchException exception){
-                // Se gerar excessão, chamo a verificação também:
-                verificacao.verificar_numero_de_telefone(numero_de_telefone_do_usuario);
-            }           
+            // Chamando método que tenta pegar o numero de telefone:
+            funcionalidade.pegar_telefone_do_candidato();
             
             // Ao pegar o numero, informo os seus dados na tela e peço que aguarde um momento:
             // Chamando método que printa as informações:
             funcionalidade.printar_informacoes_candidato();
+            
             // Pausando execução:
             funcionalidade.pausar_dois_segundos();
 
@@ -127,14 +114,7 @@ public class BaseSistema {
         // Fluxo que é execultado quando o candidato quer um valor de salário igual ao do salário base.
         else if(salario_pretendido_candidato == salario_base){
 
-            // Limpando console:
-            funcionalidade.limpar_console();
-
             
-
-
-
-
         }
 
         // Fechando instância de 'scanner':
@@ -296,6 +276,9 @@ class VerificacaoDados {
 
 class FuncionalidadesDoSistema{
 
+    // Intâncias nescessárias para funcionamento da classe:
+    VerificacaoDados verificacao = new VerificacaoDados();
+
     // Função que limpa o terminal:
     void limpar_console(){
         try{
@@ -334,5 +317,31 @@ class FuncionalidadesDoSistema{
         // Fechando instância:
         scanf.close();
     }
+
+    // Método que obtém o telefone do candidato, para fins de reutilização do código:
+    void pegar_telefone_do_candidato(){
+        
+        // Abrindo instância de scanner:
+        Scanner scanf = new Scanner(System.in);
+        
+        // Limpando terminal:
+        limpar_console();
+
+        // Texto descritivo:
+        System.out.println("\nTudo certo " + BaseSistema.nome_candidato + ". Nos informe agora, o seu número para contato.\n*Somente valores com 11 dígitos são válidos *\nInsira abaixo:");
+
+        // Tentando pegar o número de telefone:
+        try{
+            BaseSistema.numero_de_telefone_do_usuario = scanf.nextLong();
+            // Fazendo verificação:
+            verificacao.verificar_numero_de_telefone(BaseSistema.numero_de_telefone_do_usuario); 
+        }    
+        catch(InputMismatchException exception){
+            // Se gerar excessão, chamo a verificação também:
+            verificacao.verificar_numero_de_telefone(BaseSistema.numero_de_telefone_do_usuario);
+        }           
+        
+    }
+
 
 }
