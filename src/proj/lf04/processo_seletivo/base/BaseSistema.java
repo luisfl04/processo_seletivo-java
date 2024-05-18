@@ -114,7 +114,17 @@ public class BaseSistema {
         // Fluxo que é execultado quando o candidato quer um valor de salário igual ao do salário base.
         else if(salario_pretendido_candidato == salario_base){
 
+            // pedindo o numero de telefone:
+            funcionalidade.pegar_telefone_do_candidato();
+
+            // Printando suas informações:
+            funcionalidade.printar_informacoes_candidato();
             
+            // Pausando em dois segundos após teclar enter:
+            funcionalidade.pausar_dois_segundos();
+
+            // Chamando método que pergunta ao usuário se ele quer aceitar uma contraproposta feita pela empresa:
+            funcionalidade.oferecer_contra_proposta();
         }
 
         // Fechando instância de 'scanner':
@@ -270,8 +280,52 @@ class VerificacaoDados {
             }
         
         }
+    }   
+
+    // Método auxiliar que somente faz a verificação do valor que o usuário inseriu em relação a sua escolha de contraproposta:
+    boolean verificar_valor_do_caractere_da_escolha_do_usuario(String escolha_do_usuario){
+        
+        // Variável de validação da condicional:
+        boolean entrada_validada = false;
+
+        // Fazendo verificação do parâmetro:
+        if((escolha_do_usuario.length() == 1 && escolha_do_usuario == "1") || 
+        (escolha_do_usuario.length() == 1 && escolha_do_usuario == "2")){
+            entrada_validada = true;
+        }
+
+        // Retornando valor:
+        return entrada_validada;
     }
 
+
+    // Método que recebe a string que o usuário inseriu como escolha para a contraproposta no método 'oferecer_contra_proposta()'. 
+    void verificar_caractere_da_escolha_do_usuario(String escolha_do_usuario){
+        
+        // Variável de validação:
+        boolean entrada_validada = false;
+
+        // Fazendo verificação do valor:
+        if(verificar_valor_do_caractere_da_escolha_do_usuario(escolha_do_usuario) == true){
+            entrada_validada = true;
+        }
+
+        // Se a condição não for validada, peço um novo valor até que seja validado:
+        while (entrada_validada == false){
+
+            // Limpando console a cada iteração:
+            funcionalidade.limpar_console();
+
+            // Informando erro e pedindo um novo valor:
+            System.out.println("\nVocê digitou um valor de escolha inválido!\nAs escolhas são:\n(1) = Para aceitar\n(2) - Para recusar\nInsira sua escolha abaixo:");
+            escolha_do_usuario = scanf.next();
+            
+            // Verificando novamente:
+            if(verificar_valor_do_caractere_da_escolha_do_usuario(escolha_do_usuario) == true){
+                entrada_validada = true;
+            }
+        }
+    }
 }
 
 class FuncionalidadesDoSistema{
@@ -341,6 +395,29 @@ class FuncionalidadesDoSistema{
             verificacao.verificar_numero_de_telefone(BaseSistema.numero_de_telefone_do_usuario);
         }           
         
+        // Fechando instância de 'Scanner':
+        scanf.close();
+
+    }
+
+    void oferecer_contra_proposta(){
+
+        // Instâncias nescessárias para funcionamento do método:
+        Scanner scanf = new Scanner(System.in);
+
+        // Limpando terminal:
+        limpar_console();
+
+        // Oferecendo contraproposta e dando poder de escolha para o usuário:
+        System.out.println("\nInfelizmente não podemos pagar o salário que você está pedindo. Mas temos uma proposta para você!\n\nAceita o salário de R$1900?\n(1) - Para aceitar\n(2) - Para recusar\nDigite sua escolha abaixo:");
+        String escolha_do_usuario = scanf.next();
+        
+        // Fazendo verificação do valor que o usuário inseriu:
+        verificacao.verificar_caractere_da_escolha_do_usuario(escolha_do_usuario);
+
+        // Fechando instância de 'scanner':
+        scanf.close();
+
     }
 
 
