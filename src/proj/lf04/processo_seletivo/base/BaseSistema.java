@@ -94,9 +94,10 @@ public class BaseSistema {
         }
     
         // Fazendo o redirecionamento do usuário conforme o valor de salário que ele inseriu:
+        // Este fluxo diz respeito a quando o usuário quer um salário maior que o salário base implementado.
         if(salario_pretendido_candidato > salario_base){
 
-            // Primeiramente, limpando o terminal do uduário:
+            // Primeiramente, limpando o terminal do usuário:
             funcionalidade.limpar_console();
 
             // Nesse caso, é informado para que o candidato aguarde um tempo, e depois é imprimido que ele não foi selecionado para a entrevista.
@@ -113,17 +114,26 @@ public class BaseSistema {
                 verificacao.verificar_numero_de_telefone(numero_de_telefone_do_usuario);
             }           
             
-            // Ao pegar o numero, informo por um tempo uma mensagem informando o candidato para aguardar:
-            // Limpando terminal:
-            funcionalidade.limpar_console();
-            
-            // Printando mensagem e implementando pausa no sistema:
-            System.out.println("\nTudo certo " + nome_candidato + ". Peço que aguarde um momento...");
+            // Ao pegar o numero, informo os seus dados na tela e peço que aguarde um momento:
+            // Chamando método que printa as informações:
+            funcionalidade.printar_informacoes_candidato();
+            // Pausando execução:
             funcionalidade.pausar_dois_segundos();
 
             // Limpando console e informando que o candidato não conseguiu a vaga:
             funcionalidade.limpar_console();
             System.out.println("\n" + nome_candidato + ", Iremos entrar em contato com você, fique atento ao seu telefone!\nObrigado por se candidatar.");
+        }
+        // Fluxo que é execultado quando o candidato quer um valor de salário igual ao do salário base.
+        else if(salario_pretendido_candidato == salario_base){
+
+            // Limpando console:
+            funcionalidade.limpar_console();
+
+            
+
+
+
 
         }
 
@@ -304,6 +314,25 @@ class FuncionalidadesDoSistema{
         catch(InterruptedException exception){
             exception.getMessage();
         }
+    }
+
+    // Método que printa as infos relacionadas ao candidato:
+    void printar_informacoes_candidato(){
+         /**
+          * Funcionalidade do método -> Basicamente, informo os dados do usuário e peço que ele tecle enter usando o método 'nextLine()' da classe 'Scanner'.
+          Com isso, após o usuário clicar, a informação sobre sua candidatura no processo seletivo é informada. 
+          */   
+
+        /* Criando instância da classe 'Scanner', para auxiliar no processo de validação da implementação que espera que o usuário tecle 'enter'
+        para continuar o fluxo do programa: */
+        Scanner scanf = new Scanner(System.in);
+
+        // Printando infos e pedindo que tecle 'enter':
+        System.out.println("\n* SUAS INFORMAÇÔES *\n\nNome -> " + BaseSistema.nome_candidato + "\nIdade -> " + BaseSistema.idade_candidato + " anos\nSalario pretendido -> R$" + BaseSistema.salario_pretendido_candidato + "\nNumero de telefone -> " + BaseSistema.numero_de_telefone_do_usuario + "\n\nTecle ENTER para receber o seu resultado...");
+        scanf.nextLine();
+
+        // Fechando instância:
+        scanf.close();
     }
 
 }
