@@ -9,6 +9,11 @@ import java.lang.Thread;
 // Classe onde os métodos que serão nescessários para o funcionamento do sistema serão implementados.
 public class BaseSistema {
 
+    // Intâncias nescessárias para o funcionamento da classe(Foram criadas como 'static' para que fosse possível chamá-las de qualquer lugar da classe):
+    static Scanner scanf = new Scanner(System.in);
+    static VerificacaoDados verificacao = new VerificacaoDados();
+    static FuncionalidadesDoSistema funcionalidade = new FuncionalidadesDoSistema();
+    
     // Atributos globais que irão receber valores e serem mostrados na interface do sistema:
     public static String nome_candidato;
     public static int idade_candidato;
@@ -18,16 +23,12 @@ public class BaseSistema {
 
     // Método que vai pedir as informações gerais do candidato, como: nome, salário pretendido e etc. É o métodp introdutório do sistema.
     public static void pegar_informacoes_candidato(){
-        
-        // Intâncias nescessárias para o funcionamento:
-        Scanner scanf = new Scanner(System.in);
-        VerificacaoDados verificacao = new VerificacaoDados();
-        FuncionalidadesDoSistema funcionalidade = new FuncionalidadesDoSistema();
-        
         // Pedindo as informações pelo teclado:
         // Nome: -> (Não é nescessário fazer tratamento de erros em valores 'String', pois irá ser aceito qualquer tipo de valor).
         System.out.println("Olá candidato, primeiramente nos informe o seu nome.\n* Somente o primeiro nome *\n");
         nome_candidato = scanf.nextLine();
+        
+        // Limpando console:
         funcionalidade.limpar_console();
 
         // idade: -> Em todos os casos eu faço a verificação do valor. Tanto para valores numéricos inválidos, quanto para valores que não são do tipo inteiro.
@@ -58,19 +59,11 @@ public class BaseSistema {
 
         // Redirecionando o usuário com base no valor de salário que ele inseriu:
         redirecionar_com_base_na_pretencao_de_salario(salario_pretendido_candidato);
-
-        // Fechando instância de 'Scanner':
-        scanf.close();
         
     }
 
     // Método que recebe o valor de salário pretendido pelo o usuário e faz o redirecionamento com base nesse valor.
     public static void redirecionar_com_base_na_pretencao_de_salario(double salario_pretendido_candidato){
-
-        // Intâncias nescessárias para funcionamento do método:
-        FuncionalidadesDoSistema funcionalidade = new FuncionalidadesDoSistema();
-        VerificacaoDados verificacao = new VerificacaoDados();
-        Scanner scanf = new Scanner(System.in);
 
         // Pedindo que o usuario digite um novo valor, caso ele tenha pretendido um salário menor que 1000:
         while(salario_pretendido_candidato <= 1000){
@@ -104,9 +97,6 @@ public class BaseSistema {
             // Chamando método que printa as informações:
             funcionalidade.printar_informacoes_candidato();
             
-            // Pausando execução:
-            funcionalidade.pausar_dois_segundos();
-
             // Limpando console e informando que o candidato não conseguiu a vaga:
             funcionalidade.limpar_console();
             System.out.println("\n" + nome_candidato + ", Iremos entrar em contato com você, fique atento ao seu telefone!\nObrigado por se candidatar.");
@@ -120,25 +110,15 @@ public class BaseSistema {
             // Printando suas informações:
             funcionalidade.printar_informacoes_candidato();
             
-            // Pausando em dois segundos após teclar enter:
-            funcionalidade.pausar_dois_segundos();
-
             // Chamando método que pergunta ao usuário se ele quer aceitar uma contraproposta feita pela empresa:
             funcionalidade.oferecer_contra_proposta();
         }
-
-        // Fechando instância de 'scanner':
-        scanf.close();
 
     }
 }
 
 // Classe que vai conter os métodos que irão ser usados para analisar os dados que o candidato inseriu:
 class VerificacaoDados {   
-    
-    // Instâncias nescessárias para o funcionamento da classe:
-    Scanner scanf = new Scanner(System.in);
-    FuncionalidadesDoSistema funcionalidade = new FuncionalidadesDoSistema();
     
     // Método que verifica o valor numérico da idade informada. Usado para fins de validação.
     boolean verificar_idade_com_base_no_numero(int idade_informada_pelo_usuario){
@@ -166,12 +146,12 @@ class VerificacaoDados {
         while(entrada_validada == false){
             
             // Limpando console a cada entrada inválida:
-            funcionalidade.limpar_console();
+            BaseSistema.funcionalidade.limpar_console();
             
             // Informando erro e tentando pedir o valor novamente:
             try{
                 System.out.println("\nO valor inserido é invalido!!!!\nInsira um valor válido abaixo:");
-                idade_informada_pelo_usuario = scanf.nextInt();
+                idade_informada_pelo_usuario = BaseSistema.scanf.nextInt();
 
                 // Verificando valor novamente:
                 if(verificar_idade_com_base_no_numero(idade_informada_pelo_usuario) == true){
@@ -180,7 +160,7 @@ class VerificacaoDados {
             }
             catch(InputMismatchException exception){
                 // limpando o 'scanner' para pedir o valor novamente em 'try':
-                scanf.next();   
+                BaseSistema.scanf.next();   
             }
             
         } 
@@ -211,13 +191,13 @@ class VerificacaoDados {
         while(entrada_validada == false){
 
             // Limpando console:
-            funcionalidade.limpar_console();
+            BaseSistema.funcionalidade.limpar_console();
 
             // Tentando pegar um novo valor e autorizar a entrada de dados:
             try{
                 // Pedindo valor:
                 System.out.println("\nO valor que você inseriu é inválido!\nInsira um valor novamente abaixo:");
-                salario_pretendido_candidato = scanf.nextDouble();
+                salario_pretendido_candidato = BaseSistema.scanf.nextDouble();
                 
                 // Verificando novamente:
                 if(verificar_salario_pretendido_com_base_no_numero(salario_pretendido_candidato) == true){
@@ -226,7 +206,7 @@ class VerificacaoDados {
             }
             catch(InputMismatchException exception){
                 // Limpando 'scanner'.
-                scanf.next();
+                BaseSistema.scanf.next();
             }
 
         } 
@@ -262,12 +242,12 @@ class VerificacaoDados {
         while(entrada_validada == false){
 
             // Limpando console:
-            funcionalidade.limpar_console(); 
+            BaseSistema.funcionalidade.limpar_console(); 
 
             // Tentando pegar um valor novo:
             try{
                 System.out.println("\nVocê digitou um valor de telefone inválido! Verifique as regras e insira novamente.\nDigite abaixo um novo valor:");
-                numero_de_telefone_do_usuario = scanf.nextLong();
+                numero_de_telefone_do_usuario = BaseSistema.scanf.nextLong();
 
                 // Verificando o valor inserido novamente:
                 if(verificar_valor_numerico_do_telefone(numero_de_telefone_do_usuario) == true){
@@ -276,7 +256,7 @@ class VerificacaoDados {
             }
             catch(InputMismatchException exception){
                 // Se o usuário digitou um valor diferente do tipo numérico, é limpado o scanner e é pedido um novo valor:
-                scanf.next();
+                BaseSistema.scanf.next();
             }
         
         }
@@ -314,11 +294,11 @@ class VerificacaoDados {
         while (entrada_validada == false){
 
             // Limpando console a cada iteração:
-            funcionalidade.limpar_console();
+            BaseSistema.funcionalidade.limpar_console();
 
             // Informando erro e pedindo um novo valor:
             System.out.println("\nVocê digitou um valor de escolha inválido!\nAs escolhas são:\n(1) = Para aceitar\n(2) - Para recusar\nInsira sua escolha abaixo:");
-            escolha_do_usuario = scanf.next();
+            escolha_do_usuario = BaseSistema.scanf.next();
             
             // Verificando novamente:
             if(verificar_valor_do_caractere_da_escolha_do_usuario(escolha_do_usuario) == true){
@@ -329,9 +309,6 @@ class VerificacaoDados {
 }
 
 class FuncionalidadesDoSistema{
-
-    // Intâncias nescessárias para funcionamento da classe:
-    VerificacaoDados verificacao = new VerificacaoDados();
 
     // Função que limpa o terminal:
     void limpar_console(){
@@ -360,23 +337,13 @@ class FuncionalidadesDoSistema{
           Com isso, após o usuário clicar, a informação sobre sua candidatura no processo seletivo é informada. 
           */   
 
-        /* Criando instância da classe 'Scanner', para auxiliar no processo de validação da implementação que espera que o usuário tecle 'enter'
-        para continuar o fluxo do programa: */
-        Scanner scanf = new Scanner(System.in);
-
         // Printando infos e pedindo que tecle 'enter':
         System.out.println("\n* SUAS INFORMAÇÔES *\n\nNome -> " + BaseSistema.nome_candidato + "\nIdade -> " + BaseSistema.idade_candidato + " anos\nSalario pretendido -> R$" + BaseSistema.salario_pretendido_candidato + "\nNumero de telefone -> " + BaseSistema.numero_de_telefone_do_usuario + "\n\nTecle ENTER para receber o seu resultado...");
-        scanf.nextLine();
-
-        // Fechando instância:
-        scanf.close();
+        BaseSistema.scanf.nextLine();
     }
 
     // Método que obtém o telefone do candidato, para fins de reutilização do código:
     void pegar_telefone_do_candidato(){
-        
-        // Abrindo instância de scanner:
-        Scanner scanf = new Scanner(System.in);
         
         // Limpando terminal:
         limpar_console();
@@ -386,39 +353,28 @@ class FuncionalidadesDoSistema{
 
         // Tentando pegar o número de telefone:
         try{
-            BaseSistema.numero_de_telefone_do_usuario = scanf.nextLong();
+            BaseSistema.numero_de_telefone_do_usuario = BaseSistema.scanf.nextLong();
             // Fazendo verificação:
-            verificacao.verificar_numero_de_telefone(BaseSistema.numero_de_telefone_do_usuario); 
+            BaseSistema.verificacao.verificar_numero_de_telefone(BaseSistema.numero_de_telefone_do_usuario); 
         }    
         catch(InputMismatchException exception){
             // Se gerar excessão, chamo a verificação também:
-            verificacao.verificar_numero_de_telefone(BaseSistema.numero_de_telefone_do_usuario);
+            BaseSistema.verificacao.verificar_numero_de_telefone(BaseSistema.numero_de_telefone_do_usuario);
         }           
         
-        // Fechando instância de 'Scanner':
-        scanf.close();
-
     }
 
     void oferecer_contra_proposta(){
-
-        // Instâncias nescessárias para funcionamento do método:
-        Scanner scanf = new Scanner(System.in);
-
         // Limpando terminal:
         limpar_console();
 
         // Oferecendo contraproposta e dando poder de escolha para o usuário:
         System.out.println("\nInfelizmente não podemos pagar o salário que você está pedindo. Mas temos uma proposta para você!\n\nAceita o salário de R$1900?\n(1) - Para aceitar\n(2) - Para recusar\nDigite sua escolha abaixo:");
-        String escolha_do_usuario = scanf.next();
+        String escolha_do_usuario = BaseSistema.scanf.next();
         
         // Fazendo verificação do valor que o usuário inseriu:
-        verificacao.verificar_caractere_da_escolha_do_usuario(escolha_do_usuario);
-
-        // Fechando instância de 'scanner':
-        scanf.close();
+        BaseSistema.verificacao.verificar_caractere_da_escolha_do_usuario(escolha_do_usuario);
 
     }
-
 
 }
