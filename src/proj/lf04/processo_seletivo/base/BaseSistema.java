@@ -23,7 +23,12 @@ public class BaseSistema {
     public static int escolha_do_usuario_na_contraproposta;
 
     // Método que vai pedir as informações gerais do candidato, como: nome, salário pretendido e etc. É o métodp introdutório do sistema.
+    // Este é o método principal, ele chama todas as implementações que o sistema nescessita para funcionar.
     public static void pegar_informacoes_candidato(){
+        
+        // Primeiramente, limpando o console depois da mensagem de boas vindas ter sido apresentada:
+
+    
         // Pedindo as informações pelo teclado:
         // Nome: -> (Não é nescessário fazer tratamento de erros em valores 'String', pois irá ser aceito qualquer tipo de valor).
         System.out.println("Olá candidato, primeiramente nos informe o seu nome.\n* Somente o primeiro nome *\n");
@@ -76,6 +81,7 @@ public class BaseSistema {
             try{
                 System.out.println("O valor salarial que você informou é muito baixo. Tente inserir um valor acima de R$1000\nInsira abaixo");
                 salario_pretendido_candidato = scanf.nextDouble();
+                BaseSistema.salario_pretendido_candidato = salario_pretendido_candidato;
 
                 // Verificando o valor que ele inseriu:
                 verificacao.verificar_salario_pretendido(salario_pretendido_candidato);
