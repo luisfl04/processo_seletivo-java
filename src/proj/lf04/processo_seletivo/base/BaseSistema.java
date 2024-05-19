@@ -215,7 +215,8 @@ class VerificacaoDados {
                 // Pedindo valor:
                 System.out.println("\nO valor que você inseriu é inválido!\nInsira um valor novamente abaixo:");
                 salario_pretendido_candidato = BaseSistema.scanf.nextDouble();
-                
+                BaseSistema.salario_pretendido_candidato = salario_pretendido_candidato;
+
                 // Verificando novamente:
                 if(verificar_salario_pretendido_com_base_no_numero(salario_pretendido_candidato) == true){
                     entrada_validada = true;
