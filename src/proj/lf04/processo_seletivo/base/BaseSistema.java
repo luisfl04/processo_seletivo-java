@@ -114,8 +114,23 @@ public class BaseSistema {
             // Chamando método que pergunta ao usuário se ele quer aceitar uma contraproposta feita pela empresa:
             funcionalidade.oferecer_contra_proposta();
         }
+        else{
+
+            // Pedindo telefone:
+            funcionalidade.pegar_telefone_do_candidato();
+
+            // Printando todas as suas infos:
+            funcionalidade.printar_informacoes_candidato();
+
+            // Limpando console:
+            funcionalidade.limpar_console();
+
+            // Informando que o usuário foi contratado:
+            System.out.println("\n* PARABÈNS *\n\nVocê está contratado " + nome_candidato + "!\nObrigado por querer fazer parteda nossa empresa, estamos ansiosos para construir um futuro junto com você.\nVocê começa sua jornada na segunda-feira.");
+        }
 
     }
+
 }
 
 // Classe que vai conter os métodos que irão ser usados para analisar os dados que o candidato inseriu:
@@ -153,6 +168,7 @@ class VerificacaoDados {
             try{
                 System.out.println("\nO valor inserido é invalido!!!!\nInsira um valor válido abaixo:");
                 idade_informada_pelo_usuario = BaseSistema.scanf.nextInt();
+                BaseSistema.idade_candidato  = idade_informada_pelo_usuario;
 
                 // Verificando valor novamente:
                 if(verificar_idade_com_base_no_numero(idade_informada_pelo_usuario) == true){
@@ -351,7 +367,7 @@ class FuncionalidadesDoSistema{
         limpar_console();
 
         // Texto descritivo:
-        System.out.println("\nTudo certo " + BaseSistema.nome_candidato + ". Nos informe agora, o seu número para contato.\n*Somente valores com 11 dígitos são válidos *\nInsira abaixo:");
+        System.out.println("\nTudo certo " + BaseSistema.nome_candidato + ". Nos informe agora, o seu número para contato.\n* Somente valores com 11 dígitos são válidos *\nInsira abaixo:");
 
         // Tentando pegar o número de telefone:
         try{
