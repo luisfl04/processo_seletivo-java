@@ -341,7 +341,6 @@ class FuncionalidadesDoSistema{
 
         // Printando infos e pedindo que tecle 'enter':
         System.out.println("\n* SUAS INFORMAÇÔES *\n\nNome -> " + BaseSistema.nome_candidato + "\nIdade -> " + BaseSistema.idade_candidato + " anos\nSalario pretendido -> R$" + BaseSistema.salario_pretendido_candidato + "\nNumero de telefone -> " + BaseSistema.numero_de_telefone_do_usuario + "\n\nTecle ENTER para receber o seu resultado...");
-    
     }
 
     // Método que obtém o telefone do candidato, para fins de reutilização do código:
