@@ -10,7 +10,35 @@
 ## Screenshot do sistema:
 ![foto ilustrativa do sistema](./imagem/foto_ilustrativa_do_sistema.PNG)
 
-## Descrição do funcionamento
+## Descrição do funcionamento do sistema:
+### Descrição geral:
+>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
