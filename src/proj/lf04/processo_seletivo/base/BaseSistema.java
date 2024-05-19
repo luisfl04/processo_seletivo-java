@@ -20,6 +20,7 @@ public class BaseSistema {
     public static double salario_pretendido_candidato;
     public static long numero_de_telefone_do_usuario;
     public static double salario_base = 2000;  
+    public static int escolha_do_usuario_na_contraproposta;
 
     // Método que vai pedir as informações gerais do candidato, como: nome, salário pretendido e etc. É o métodp introdutório do sistema.
     public static void pegar_informacoes_candidato(){
@@ -263,49 +264,49 @@ class VerificacaoDados {
         }
     }   
 
-    // Método auxiliar que somente faz a verificação do valor que o usuário inseriu em relação a sua escolha de contraproposta:
-    boolean verificar_valor_do_caractere_da_escolha_do_usuario(String escolha_do_usuario){
-        
-        // Variável de validação da condicional:
-        boolean entrada_validada = false;
-
-        // Fazendo verificação do parâmetro:
-        if((escolha_do_usuario.length() == 1 && escolha_do_usuario == "1") || 
-        (escolha_do_usuario.length() == 1 && escolha_do_usuario == "2")){
-            entrada_validada = true;
+    // Método auxiliar que verifica somente o valor numérico relacionado ao caractere que o usuário escolheu:
+    boolean verificar_valor_do_caractere_da_escolha_do_usuario(int escolha_do_usuario){
+        if(escolha_do_usuario > 0 && escolha_do_usuario < 3){
+            return true;
         }
-
-        // Retornando valor:
-        return entrada_validada;
+        else{
+            return false;
+        }
     }
 
+    // Método que recebe o valor inteiro que o usuário inseriu como escolha para a contraproposta no método 'oferecer_contra_proposta()'. 
+    void verificar_caractere_da_escolha_do_usuario(int escolha_do_usuario){
 
-    // Método que recebe a string que o usuário inseriu como escolha para a contraproposta no método 'oferecer_contra_proposta()'. 
-    void verificar_caractere_da_escolha_do_usuario(String escolha_do_usuario){
-        
-        // Variável de validação:
+        // Criando variável de validação:
         boolean entrada_validada = false;
 
-        // Fazendo verificação do valor:
         if(verificar_valor_do_caractere_da_escolha_do_usuario(escolha_do_usuario) == true){
             entrada_validada = true;
         }
 
-        // Se a condição não for validada, peço um novo valor até que seja validado:
-        while (entrada_validada == false){
+        while(entrada_validada == false){
 
             // Limpando console a cada iteração:
             BaseSistema.funcionalidade.limpar_console();
 
-            // Informando erro e pedindo um novo valor:
-            System.out.println("\nVocê digitou um valor de escolha inválido!\nAs escolhas são:\n(1) = Para aceitar\n(2) - Para recusar\nInsira sua escolha abaixo:");
-            escolha_do_usuario = BaseSistema.scanf.next();
-            
-            // Verificando novamente:
-            if(verificar_valor_do_caractere_da_escolha_do_usuario(escolha_do_usuario) == true){
-                entrada_validada = true;
+            // Tentando pegar um novo valor:
+            try{
+                // Pedindo valor:
+                System.out.println("\nO valor que você inseriu é inválido!\nSuas opções são:\n(1) - Para aceitar proposta\n(2) - Para negar proposta\nInsira sua escolha abaixo:");
+                escolha_do_usuario = BaseSistema.scanf.nextInt();
+
+                // Verificando valor novamente:
+                if(verificar_valor_do_caractere_da_escolha_do_usuario(escolha_do_usuario) == true){
+                    entrada_validada = true;
+                } 
             }
+            catch(InputMismatchException exception){
+                // Se gerar excessão, limpo scanner para pedir valor novamente:
+                BaseSistema.scanf.next();
+            }
+        
         }
+    
     }
 }
 
@@ -373,16 +374,23 @@ class FuncionalidadesDoSistema{
     }
 
     void oferecer_contra_proposta(){
-        // Limpando terminal:
+
+        // Limpando console:
         limpar_console();
 
-        // Oferecendo contraproposta e dando poder de escolha para o usuário:
-        System.out.println("\nInfelizmente não podemos pagar o salário que você está pedindo. Mas temos uma proposta para você!\n\nAceita o salário de R$1900?\n(1) - Para aceitar\n(2) - Para recusar\nDigite sua escolha abaixo:");
-        String escolha_do_usuario = BaseSistema.scanf.next();
-        
-        // Fazendo verificação do valor que o usuário inseriu:
-        BaseSistema.verificacao.verificar_caractere_da_escolha_do_usuario(escolha_do_usuario);
+        // Informando mensagem e tentando pedindo um valor de escolha para o usuário:
+        try{
+            System.out.println("\n Infelizmente não podemos pagar o valor salarial que você pretende, mas, temos uma oferta pra você.\nAceita o salario mensal de R$1900?\n(1) - Para aceitar\n(2) - Para negar\nInsira sua escolha abaixo:");
+            BaseSistema.escolha_do_usuario_na_contraproposta = BaseSistema.scanf.nextInt();            
 
+            // Fazendo verificação do valor inserido:
+            BaseSistema.verificacao.verificar_caractere_da_escolha_do_usuario(BaseSistema.escolha_do_usuario_na_contraproposta);
+        }
+        catch(InputMismatchException exception){
+            // Se gerar excessão, chama o método de checagem também:
+            BaseSistema.verificacao.verificar_caractere_da_escolha_do_usuario(BaseSistema.escolha_do_usuario_na_contraproposta);
+        }
+    
     }
 
 }
