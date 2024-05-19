@@ -26,12 +26,9 @@ public class BaseSistema {
     // Este é o método principal, ele chama todas as implementações que o sistema nescessita para funcionar.
     public static void pegar_informacoes_candidato(){
         
-        // Primeiramente, limpando o console depois da mensagem de boas vindas ter sido apresentada:
-
-    
         // Pedindo as informações pelo teclado:
         // Nome: -> (Não é nescessário fazer tratamento de erros em valores 'String', pois irá ser aceito qualquer tipo de valor).
-        System.out.println("Olá candidato, primeiramente nos informe o seu nome.\n* Somente o primeiro nome *\n");
+        System.out.println("\nOlá candidato, primeiramente nos informe o seu nome.\n* Somente o primeiro nome *\n");
         nome_candidato = scanf.nextLine();
         
         // Limpando console:
