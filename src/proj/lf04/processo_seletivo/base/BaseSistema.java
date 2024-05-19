@@ -322,10 +322,10 @@ class FuncionalidadesDoSistema{
         }
     }
 
-    // função que pausa a execução em 2 segundos:
-    void pausar_dois_segundos(){
+    // função que pausa a execução no valor que o usuário passar no parâmetro(Em milissegundos):
+    void pausar_execucao(long valor_de_parada_em_milisegundos){
         try{
-            Thread.sleep(2000);
+            Thread.sleep(valor_de_parada_em_milisegundos);
         }
         catch(InterruptedException exception){
             exception.getMessage();
@@ -380,6 +380,9 @@ class FuncionalidadesDoSistema{
 
         // Informando mensagem e tentando pedindo um valor de escolha para o usuário:
         try{
+
+            BaseSistema.scanf.next();
+
             System.out.println("\n Infelizmente não podemos pagar o valor salarial que você pretende, mas, temos uma oferta pra você.\nAceita o salario mensal de R$1900?\n(1) - Para aceitar\n(2) - Para negar\nInsira sua escolha abaixo:");
             BaseSistema.escolha_do_usuario_na_contraproposta = BaseSistema.scanf.nextInt();            
 
