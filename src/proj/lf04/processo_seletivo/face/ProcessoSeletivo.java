@@ -19,7 +19,7 @@ public class ProcessoSeletivo{
     // Método que Dar informações de boas vindas para o usuário:
     public static void dar_boas_vindas(){
 
-        System.out.println("* PROCESSO SELETIVO PARA VAGA DE EMPREGO *\n\nOlá canditado, primeiramente, nos informe seus dados para que possamos analisá-los e dar uma resposta para você.\n\nAguarde um momento... ");
+        System.out.println("\n* PROCESSO SELETIVO PARA VAGA DE EMPREGO *\n\nOlá canditado, primeiramente, nos informe seus dados para que possamos analisá-los e dar uma resposta para você.\n\nAguarde um momento... ");
 
         // Dando um pequena pausa na execução do método:
         try{
