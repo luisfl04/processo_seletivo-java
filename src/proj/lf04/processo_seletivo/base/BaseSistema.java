@@ -330,6 +330,13 @@ class FuncionalidadesDoSistema{
         }
     }
 
+    // Método que pede ao usuário que ele tecle 'enter' para seguir a excução:
+    void teclar_enter(){
+        Scanner scanf = new Scanner(System.in);
+        scanf.nextLine();
+        scanf.close();
+    }
+
     // Método que printa as infos relacionadas ao candidato:
     void printar_informacoes_candidato(){
          /**
@@ -339,7 +346,7 @@ class FuncionalidadesDoSistema{
 
         // Printando infos e pedindo que tecle 'enter':
         System.out.println("\n* SUAS INFORMAÇÔES *\n\nNome -> " + BaseSistema.nome_candidato + "\nIdade -> " + BaseSistema.idade_candidato + " anos\nSalario pretendido -> R$" + BaseSistema.salario_pretendido_candidato + "\nNumero de telefone -> " + BaseSistema.numero_de_telefone_do_usuario + "\n\nTecle ENTER para receber o seu resultado...");
-        BaseSistema.scanf.nextLine();
+        teclar_enter();
     }
 
     // Método que obtém o telefone do candidato, para fins de reutilização do código:
