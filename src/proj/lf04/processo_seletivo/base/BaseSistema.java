@@ -340,7 +340,8 @@ class FuncionalidadesDoSistema{
           */   
 
         // Printando infos e pedindo que tecle 'enter':
-        System.out.println("\n* SUAS INFORMAÇÔES *\n\nNome -> " + BaseSistema.nome_candidato + "\nIdade -> " + BaseSistema.idade_candidato + " anos\nSalario pretendido -> R$" + BaseSistema.salario_pretendido_candidato + "\nNumero de telefone -> " + BaseSistema.numero_de_telefone_do_usuario + "\n\nTecle ENTER para receber o seu resultado...");
+        System.out.println("\n* SUAS INFORMAÇÔES *\n\nNome -> " + BaseSistema.nome_candidato + "\nIdade -> " + BaseSistema.idade_candidato + " anos\nSalario pretendido -> R$" + BaseSistema.salario_pretendido_candidato + "\nNumero de telefone -> " + BaseSistema.numero_de_telefone_do_usuario + "\n\nAguarde um momento...");
+        pausar_execucao(4000); // Pausando execução em 4 segundos.
     }
 
     // Método que obtém o telefone do candidato, para fins de reutilização do código:
@@ -383,7 +384,34 @@ class FuncionalidadesDoSistema{
             // Se gerar excessão, chama o método de checagem também:
             BaseSistema.verificacao.verificar_caractere_da_escolha_do_usuario(BaseSistema.escolha_do_usuario_na_contraproposta);
         }
-    
+        
+        // Ao fazer sua escolha, é imprimida uma mensagem ao candidato conforme o seu valor escolhido:
+        // Basicamente, nesta parte do programa, é pedido pro usuário aguardar por 5 segundos, e após isso a mensagem correspondente é mostrada:
+        if(BaseSistema.escolha_do_usuario_na_contraproposta == 1){
+
+            // limpando console:
+            limpar_console();
+
+            // Mensagem de espera e pausa no sistema:
+            System.out.println("\nAguarde um momento...");
+            pausar_execucao(5000);
+
+            // Mensagem correspondente:
+            limpar_console();
+            System.out.println("* VOCÊ ESTÁ CONTRATADO! *\nAgora você faz parte do nosso time de funcionários. Estamos ansiosos por lhe ter em nossa empresa " + BaseSistema.nome_candidato + "!\nVocê começa na segunda-feira.");
+        }
+        else{
+            // Limpando console:
+            limpar_console();
+
+            // Mensagem de espera:
+            System.out.println("\nAguade só um momentinho...");
+            pausar_execucao(4000);
+
+            // Mensagem correspondente:
+            limpar_console();
+            System.out.println("\nRespeitamos sua escolha " + BaseSistema.nome_candidato + "!\nObrigado por se candidatar em nossa empresa.\nAté mais...");
+        }   
     }
 
 }
