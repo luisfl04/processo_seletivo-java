@@ -251,6 +251,7 @@ class VerificacaoDados {
 
                 // Verificando o valor inserido novamente:
                 if(verificar_valor_numerico_do_telefone(numero_de_telefone_do_usuario) == true){
+                    BaseSistema.numero_de_telefone_do_usuario = numero_de_telefone_do_usuario;
                     entrada_validada = true;
                 }
             }
